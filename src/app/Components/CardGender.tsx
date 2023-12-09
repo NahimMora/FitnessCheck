@@ -21,7 +21,7 @@ const CardGender = () => {
   };
 
   return (
-    <div>
+    <div className='flex flex-row'>
       {gender.map((genderItem) => (
         <div key={genderItem.gender}> 
           <button
