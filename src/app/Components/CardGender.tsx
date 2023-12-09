@@ -10,9 +10,7 @@ const gender = [
 ]
 
 const CardGender = () => {
-  
   const [activeGender, setActiveGender] = useState<string | null>(null);
-        //male
 
   const handleClick = (name: string) => {
     if (activeGender === name) {
@@ -24,24 +22,24 @@ const CardGender = () => {
 
   return (
     <div>
-    {gender.map((gender, index) => (
-      <div key={index}> 
-      <button
-      type="button"
-      className={`${
-        gender.gender === activeGender
-        ? 'bg-blue-300 text-black hover:bg-blue-400'
-        : 'bg-slate-100 text-black hover:bg-blue-400'
-      } border border-black p-4 w-28 h-32 mt-2 mx-5 rounded-xl hover:scale-105 transition-transform duration-300`}
-      onClick={() => handleClick(gender.gender)}
-      >
-      <div className='flex flex-col items-center'>
-        <Image src={gender.icon} alt={gender.gender} width={50} height={50} />
-        <p className='mt-4 text-lg font-semibold'>{gender.name}</p>
-      </div>
-      </button>
-      </div>
-    ))}
+      {gender.map((genderItem) => (
+        <div key={genderItem.gender}> 
+          <button
+            type="button"
+            className={`${
+              genderItem.gender === activeGender
+                ? 'bg-blue-300 text-black hover:bg-blue-400'
+                : 'bg-slate-100 text-black hover:bg-blue-400'
+            } border border-black p-4 w-28 h-32 mt-2 mx-5 rounded-xl hover:scale-105 transition-transform duration-300`}
+            onClick={() => handleClick(genderItem.gender)}
+          >
+            <div className='flex flex-col items-center'>
+              <Image src={genderItem.icon} alt={genderItem.gender} width={50} height={50} />
+              <p className='mt-4 text-lg font-semibold'>{genderItem.name}</p>
+            </div>
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
