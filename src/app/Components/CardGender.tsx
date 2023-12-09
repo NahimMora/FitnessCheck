@@ -23,8 +23,9 @@ const CardGender = () => {
   };
 
   return (
-    <>
+    <div>
     {gender.map((gender, index) => (
+      <div key={index}> 
       <button
       type="button"
       className={`${
@@ -38,9 +39,10 @@ const CardGender = () => {
         <Image src={gender.icon} alt={gender.gender} width={50} height={50} />
         <p className='mt-4 text-lg font-semibold'>{gender.name}</p>
       </div>
-    </button>
+      </button>
+      </div>
     ))}
-    </>
+    </div>
   );
 };
 
