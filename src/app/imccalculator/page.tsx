@@ -1,11 +1,71 @@
-import Image from 'next/image'
-import React from 'react'
-import CardGender from '../Components/CardGender'
+'use client'
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import CardGender from '../Components/CardGender';
+import Swal from 'sweetalert2'
 
-import iconMale from '../../../public/icons/male.svg'
-import iconFemale from '../../../public/icons/female.svg'
+const ImcPage: React.FC = () => {
+  const [age, setAge] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
+  const [result, setResult] = useState<number | null>(null);
+  const [minIMC, setMinIMC] = useState<number | null>(null);
+  const [maxIMC, setMaxIMC] = useState<number | null>(null);
 
-const ImcPage = () => {
+  const handleClickCalculator = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (age && height && weight) {
+      setAge(0);
+      setHeight(0);
+      setWeight(0);
+      setResult(null);
+      Swal.fire({
+        title: `Tu IMC es de ${parseFloat(result?result.toFixed(2):"")}`,
+        icon: 'info',
+        iconColor: '#001845',
+        color: '#001845',
+        footer: `Tu peso ideal es ${parseFloat(minIMC?minIMC.toFixed(2):"")}kg - ${parseFloat(maxIMC?maxIMC.toFixed(2):"")}kg `,
+        confirmButtonText: 'Hecho',
+        confirmButtonColor: '#001845'
+      })
+    } else {
+      Swal.fire({
+        title: 'Completa todos los campos',
+        background: '#a2d6f9',
+        timerProgressBar: true,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  }
+
+  const handleResetImc = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (age && height && weight) {
+      setAge(0);
+      setHeight(0);
+      setWeight(0);
+      setResult(null);
+    } else {
+      Swal.fire({
+        title: 'Completa todos los campos',
+        background: '#a2d6f9',
+        timerProgressBar: true,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  };
+
+  useEffect(() => {
+    if (age && height && weight) {
+      const result = Number(weight) / Math.pow(Number(height) / 100, 2);
+      const min = 18.5*(Math.pow(Number(height) / 100, 2))
+      const max = 24.9*(Math.pow(Number(height) / 100, 2))
+      setResult(result);
+      setMinIMC(min)
+      setMaxIMC(max)
+    }
+  }, [age, height, weight]);
 
   return (
     <section className='my-24'>
@@ -20,8 +80,7 @@ const ImcPage = () => {
           <span className='flex flex-col m-5 items-center'>
             <label className='mb-2 text-xl font-bold'>¿Cuál es tu género?</label>
             <div className='flex flex-row'>
-              <CardGender icon={iconMale} name={'Hombre'} />
-              <CardGender icon={iconFemale} name={'Mujer'} />
+              <CardGender/>
             </div>
           </span>
         </div>
@@ -30,8 +89,12 @@ const ImcPage = () => {
           <span className='flex flex-col m-5 items-center'>
             <label className='mb-2 text-xl font-bold'>¿Cuántos años tienes?</label>
             <div className='flex items-center'>
-              <input type="text" placeholder='21'
-                className='w-full md:w-16 border-b-2 border-black h-10 text-2xl text-center font-bold focus:outline-none'
+              <input
+                type="number"
+                placeholder='21'
+                className='border-b-2 border-black h-10 w-20 text-2xl text-center font-bold focus:outline-none'
+                value={age === 0 ? '' : age}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setAge(Number(e.target.value))}
               />
               <h1 className='text-xl ml-2'>años</h1>
             </div>
@@ -42,8 +105,12 @@ const ImcPage = () => {
           <span className='flex flex-col m-5 items-center'>
             <label className='mb-2 text-xl font-bold'>¿Cuánto mides?</label>
             <div className='flex items-center'>
-              <input type="text" placeholder='170'
-                className='w-full md:w-16 border-b-2 border-black h-10 text-2xl text-center font-bold focus:outline-none'
+              <input
+                type="number"
+                placeholder='170'
+                className='w-20 md:w-16 border-b-2 border-black h-10 text-2xl text-center font-bold focus:outline-none'
+                value={height === 0 ? '' : height}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setHeight(Number(e.target.value))}
               />
               <h1 className='text-xl ml-2'>cm</h1>
             </div>
@@ -54,8 +121,12 @@ const ImcPage = () => {
           <span className='flex flex-col m-5 items-center'>
             <label className='mb-2 text-xl font-bold'>¿Cuánto pesas?</label>
             <div className='flex items-center'>
-              <input type="text" placeholder='65'
-                className='w-full md:w-16 border-b-2 border-black h-10 text-2xl text-center font-bold focus:outline-none'
+              <input
+                type="number"
+                placeholder='65'
+                className='w-20 md:w-16 border-b-2 border-black h-10 text-2xl text-center font-bold focus:outline-none'
+                value={weight === 0 ? '' : weight}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setWeight(Number(e.target.value))}
               />
               <h1 className='text-xl ml-2'>kg</h1>
             </div>
@@ -63,12 +134,15 @@ const ImcPage = () => {
         </div>
       </form>
       <div className='flex justify-center mt-10'>
-          <button className='h-12 w-32 border-2 border-blue-500 bg-blue-500 rounded-full text-white hover:bg-blue-900 transition duration-300 ease-in-out'>
-            Calcular
-          </button>
-        </div>
+        <button
+          className='h-12 w-32 border-2 border-blue-500 bg-blue-500 rounded-full text-white hover:bg-blue-900 transition duration-300 ease-in-out'
+          onClick={(e) => handleClickCalculator(e)}
+        >
+          Calcular
+        </button>
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default ImcPage
+export default ImcPage;
