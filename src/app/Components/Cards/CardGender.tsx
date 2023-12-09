@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import iconMale from '../../../public/icons/male.svg';
-import iconFemale from '../../../public/icons/female.svg';
+import iconMale from '../../../../public/icons/male.svg';
+import iconFemale from '../../../../public/icons/female.svg';
 
-const gender = [
+export interface CardGender{
+  gender:string;
+  setGender:any;
+}
+
+const genders = [
   {gender: 'male', icon: iconMale, name: 'Hombre'},
   {gender: 'female', icon: iconFemale, name: 'Mujer'}
 ]
 
-const CardGender = () => {
+const CardGender = ({gender,setGender}:CardGender) => {
   const [activeGender, setActiveGender] = useState<string | null>(null);
 
   const handleClick = (name: string) => {
@@ -18,11 +23,12 @@ const CardGender = () => {
       return;
     }
     setActiveGender(name);
+    setGender(name)
   };
 
   return (
     <div className='flex flex-row '>
-      {gender.map((genderItem) => (
+      {genders.map((genderItem) => (
         <div key={genderItem.gender}> 
           <button
             type="button"
