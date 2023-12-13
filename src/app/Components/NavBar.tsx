@@ -11,12 +11,12 @@ const navLinks = [
         title: "Calcular IMC"
     },
     {
-        to: "/picalculator",
-        title: "Calcular peso ideal"
-    },
-    {
         to: "/cdcalculator",
         title: "Calcular calorias diarias"
+    },
+    {
+        to: "/about",
+        title: ""
     }
 ]
 
