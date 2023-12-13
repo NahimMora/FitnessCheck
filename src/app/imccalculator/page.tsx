@@ -6,6 +6,7 @@ import InputWeight from '../Components/Inputs/InputWeight';
 import InputHeight from '../Components/Inputs/InputHeight';
 import InputGerder from '../Components/Inputs/InputGerder';
 import ButtonForms from '../Components/Inputs/ButtonForms';
+import CardsAlerts from '../Components/Cards/CardsAlerts';
 
 const ImcPage: React.FC = () => {
 
@@ -78,6 +79,22 @@ const ImcPage: React.FC = () => {
       <div className='flex justify-center mt-10'>
       <ButtonForms title='Calcula tu IMC' onClickFunction={handleClickCalculator}/>
       </div>
+
+    <CardsAlerts 
+      info='No uses esta calculadora de IMC si eres menor de 18 años, si estás embarazada o si tienes algún trastorno alimenticio.'
+    />
+
+    <div className='m-5'>
+      <p className='text-lg leading-7 text-gray-700'>
+      El índice de masa corporal (IMC) es una medida utilizada para evaluar el peso corporal de una persona en relación con su altura. Un IMC saludable se sitúa entre 18,5 y 24,9, mientras que un IMC por encima de 25 se considera sobrepeso, y un IMC superior a 30 indica obesidad.<br/><br/>
+      El IMC es una herramienta útil para evaluar el peso corporal de una persona, pero no es una medida perfecta y debe considerarse en conjunto con otros factores de salud importantes. Mantener un IMC saludable es importante para reducir el riesgo de enfermedades crónicas y mejorar la calidad de vida a largo plazo.
+      </p>
+    </div>
+
+    <CardsAlerts
+      info='Si tienes preguntas o preocupaciones sobre tu IMC o tu salud en general, es importante hablar con un profesional de la salud.'
+    />
+
     </section>
   );
 };

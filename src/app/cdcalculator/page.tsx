@@ -9,6 +9,7 @@ import ButtonForms from '../Components/Inputs/ButtonForms';
 import InputActivity from '../Components/Inputs/InputActivity';
 
 import Swal from 'sweetalert2'
+import CardsAlerts from '../Components/Cards/CardsAlerts';
 
 const CdPage = () => {
 
@@ -88,9 +89,25 @@ const CdPage = () => {
 
       </form>
 
-      <div className='flex justify-center mt-10'>
+      <div className='flex justify-center my-10'>
         <ButtonForms title='Calcula tus calorías diarias recomendadas' onClickFunction={handleClickCalculator}/>
       </div>
+
+      <CardsAlerts 
+      info='No uses esta calculadora si eres menor de 18 años, si estás embarazada o si tienes algún trastorno alimenticio.'
+    />
+
+    <div className='m-5'>
+      <p className='text-lg leading-7 text-gray-700'>
+      Calcular las calorías diarias es crucial para lograr objetivos de salud y bienestar. Establece metas realistas y adapta tu ingesta calórica según tus objetivos, ya sea perder, mantener o ganar peso. Además, considera la calidad de los alimentos, priorizando opciones nutritivas.<br/><br/>
+      Recuerda que la hidratación adecuada y el ejercicio regular son componentes clave de un estilo de vida saludable. Escucha las señales de tu cuerpo y ajusta tu dieta según tus necesidades y preferencias.
+      </p>
+    </div>
+
+    <CardsAlerts
+      info='Si tienes preguntas o preocupaciones sobre tu peso o salud en general, es importante hablar con un profesional de la salud.'
+    />
+
 
     </section>
   )
