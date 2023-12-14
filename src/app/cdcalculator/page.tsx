@@ -68,7 +68,7 @@ const CdPage = () => {
       <h1 className='text-center text-4xl lg:text-5xl font-extrabold text-slate-700 px-5 mx-auto'>
         Calcula tus calorias diarias
       </h1>
-      <p className='text-center text-xl px-5'>
+      <p className='text-center text-xl px-5 mt-5'>
         Para un cálculo correcto necesitamos algo de información básica sobre ti.
       </p>
       <form>
