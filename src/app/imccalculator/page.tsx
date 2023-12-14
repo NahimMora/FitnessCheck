@@ -61,7 +61,7 @@ const ImcPage: React.FC = () => {
       <h1 className='text-center text-4xl lg:text-5xl font-extrabold text-slate-700 px-5 mx-auto'>
         Calcula tu IMC
       </h1>
-      <p className='text-center text-xl px-5'>
+      <p className='text-center text-xl px-5 mt-5'>
         Para un cálculo correcto necesitamos algo de información básica sobre ti.
       </p>
       <form className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 px-5 mt-10'>
